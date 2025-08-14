@@ -1,4 +1,5 @@
-openssh/DEFAULT_VERSION := V_9_9_P2
+# openssh/DEFAULT_VERSION := V_9_9_P2
+openssh/DEFAULT_VERSION := V_10_0_P2
 define openssh/determine_latest
   $(eval override openssh/VERSION := $(call shell_checked,
     . ./version.sh;
