@@ -85,12 +85,12 @@ jobs:
       # https://github.com/softprops/action-gh-release
       #  outputs
       # ###############################################
-      - name: create github release for-${{ matrix.config.description }}
+      - name: create github release
         id: new_release
         uses: softprops/action-gh-release@v2 #v2.0.8
         # if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: latest
+          name: latest-${{ matrix.config.description }}
           tag_name: v25.08
           make_latest: true
           token: ${{ github.token }} #Defaults to ${{ github.token }}
