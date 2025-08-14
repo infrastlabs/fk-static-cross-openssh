@@ -19,7 +19,7 @@ jobs:
           #!   description: x86-64
 
           - arch: x86-64
-            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
+            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=V_10_0_P2
             description: x86-64-small
 
           #! - arch: armv7-eabihf
@@ -31,7 +31,7 @@ jobs:
           #!   description: armv7-eabihf
 
           - arch: armv7-eabihf
-            config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
+            config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=V_10_0_P2
             description: armv7-eabihf-small
 
           #! - arch: aarch64
@@ -43,8 +43,12 @@ jobs:
           #!   description: aarch64
 
           - arch: aarch64
-            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
+            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=V_10_0_P2
             description: aarch64-small
+
+          - arch: ppc64le
+            config: ARCH=ppc64le PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=V_10_0_P2
+            description: ppc64le-small
 
     env:
       MAKEFLAGS: SHELL=/usr/bin/bash
@@ -65,7 +69,8 @@ jobs:
       - name: Build
         run: |
           make config ${{ matrix.config.config }}
-          make -j${{ steps.cpu-cores.outputs.count }}
+          make -j${{ steps.cpu-cores.outputs.count }} 2>&1 |grep -v "buildroot-linux-musl-gcc"
+          find output/ -type f |sort
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -80,7 +85,7 @@ jobs:
       # https://github.com/softprops/action-gh-release
       #  outputs
       # ###############################################
-      - name: create github release
+      - name: create github release for-${{ matrix.config.description }}
         id: new_release
         uses: softprops/action-gh-release@v2 #v2.0.8
         # if: startsWith(github.ref, 'refs/tags/')
