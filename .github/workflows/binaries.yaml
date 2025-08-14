@@ -5,44 +5,45 @@ on:
   push:
     branches:
       - ci
-  schedule:
-    - cron: "0 0 * * 0"
+      - sam-custom
+  #! schedule:
+  #!   - cron: "0 0 * * 0"
 
 jobs:
   build:
     strategy:
       matrix:
         config:
-          - arch: x86-64
-            config: ARCH=x86-64 PREFIX=/opt/openssh __all__/VERSION=latest
-            description: x86-64
+          #! - arch: x86-64
+          #!   config: ARCH=x86-64 PREFIX=/usr/local/static/openssh __all__/VERSION=latest
+          #!   description: x86-64
 
           - arch: x86-64
-            config: ARCH=x86-64 PREFIX=/opt/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
+            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
             description: x86-64-small
 
-          - arch: armv7-eabihf
-            config: ARCH=armv7-eabihf PREFIX=/system/opt/openssh __all__/VERSION=latest
-            description: armv7-eabihf-android
+          #! - arch: armv7-eabihf
+          #!   config: ARCH=armv7-eabihf PREFIX=/system/usr/local/static/openssh __all__/VERSION=latest
+          #!   description: armv7-eabihf-android
+
+          #! - arch: armv7-eabihf
+          #!   config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh __all__/VERSION=latest
+          #!   description: armv7-eabihf
 
           - arch: armv7-eabihf
-            config: ARCH=armv7-eabihf PREFIX=/opt/openssh __all__/VERSION=latest
-            description: armv7-eabihf
-
-          - arch: armv7-eabihf
-            config: ARCH=armv7-eabihf PREFIX=/opt/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
+            config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
             description: armv7-eabihf-small
 
-          - arch: aarch64
-            config: ARCH=aarch64 PREFIX=/system/opt/openssh __all__/VERSION=latest
-            description: aarch64-android
+          #! - arch: aarch64
+          #!   config: ARCH=aarch64 PREFIX=/system/usr/local/static/openssh __all__/VERSION=latest
+          #!   description: aarch64-android
+
+          #! - arch: aarch64
+          #!   config: ARCH=aarch64 PREFIX=/usr/local/static/openssh __all__/VERSION=latest
+          #!   description: aarch64
 
           - arch: aarch64
-            config: ARCH=aarch64 PREFIX=/opt/openssh __all__/VERSION=latest
-            description: aarch64
-
-          - arch: aarch64
-            config: ARCH=aarch64 PREFIX=/opt/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
+            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __all__/VERSION=latest
             description: aarch64-small
 
     env:
@@ -72,3 +73,35 @@ jobs:
           name: ssh-binaries-for-${{ matrix.config.description }}
           path: |
             output/${{ matrix.config.arch }}/bin/
+
+      # ###############################################
+      # https://blog.csdn.net/heroboyluck/article/details/142185264
+      #  GitHub Releases requires a tag
+      # https://github.com/softprops/action-gh-release
+      #  outputs
+      # ###############################################
+      - name: create github release
+        id: new_release
+        uses: softprops/action-gh-release@v2 #v2.0.8
+        # if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: latest
+          tag_name: v25.08
+          make_latest: true
+          token: ${{ github.token }} #Defaults to ${{ github.token }}
+          body: |
+            Automated release-2025 for tag ${{ github.ref }}          
+          # append_body
+          # generate_release_notes
+          draft: false
+          prerelease: false
+          preserve_order: true
+          fail_on_unmatched_files: false
+          # repository:  #Defaults to GITHUB_REPOSITORY env variable
+          # body_path: 
+          # target_commitish
+          # files: ebook.pdf
+          files: |
+            # ebook.pdf
+            # LICENSE
+            output/${{ matrix.config.arch }}/bin/*
