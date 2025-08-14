@@ -9,6 +9,10 @@ define openssh/determine_latest
 endef
 $(call determine_version,openssh,$(openssh/DEFAULT_VERSION))
 
+# https://github.com/openssh/openssh-portable/archive/refs/tags/V_9_9_P2.tar.gz
+# https://github.com/openssh/openssh-portable/archive/refs/tags/V_10_0_P2.tar.gz
+# https://github.com/openssh/openssh-portable/archive/refs/tags/V_10_0_P2.zip
+# https://github.com/openssh/openssh-portable/archive/refs/heads/master.zip
 openssh/TARBALL := https://github.com/openssh/openssh-portable/archive/refs/tags/$(openssh/VERSION).tar.gz
 openssh/DEPENDS := zlib openssl
 
