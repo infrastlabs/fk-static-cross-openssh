@@ -19,7 +19,7 @@ jobs:
           #!   description: x86-64
 
           - arch: x86-64
-            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION= openssh/VERSION=V_10_0_P2
+            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.05-1 openssh/VERSION=V_10_0_P2
             description: x86-64-small
 
           #! - arch: armv7-eabihf
@@ -31,7 +31,7 @@ jobs:
           #!   description: armv7-eabihf
 
           - arch: armv7-eabihf
-            config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION= openssh/VERSION=V_10_0_P2
+            config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.05-1 openssh/VERSION=V_10_0_P2
             description: armv7-eabihf-small
 
           #! - arch: aarch64
@@ -43,11 +43,11 @@ jobs:
           #!   description: aarch64
 
           - arch: aarch64
-            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION= openssh/VERSION=V_10_0_P2
+            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.05-1 openssh/VERSION=V_10_0_P2
             description: aarch64-small
 
           - arch: ppc64le
-            config: ARCH=ppc64le PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION= openssh/VERSION=V_10_0_P2
+            config: ARCH=ppc64le PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.05-1 openssh/VERSION=V_10_0_P2
             description: ppc64le-small
 
     env:
