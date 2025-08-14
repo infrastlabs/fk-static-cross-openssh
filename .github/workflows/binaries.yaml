@@ -47,9 +47,10 @@ jobs:
             config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.08-2 openssh/VERSION=V_10_0_P2
             description: aarch64-small
 
-          - arch: ppc64le
-            config: ARCH=ppc64le PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.08-2 openssh/VERSION=V_10_0_P2
-            description: ppc64le-small
+          #! https://toolchains.bootlin.com/downloads/releases/toolchains/powerpc64le-power8/
+          #! - arch: ppc64le
+          #!   config: ARCH=ppc64le PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME __toolchain__/VERSION=2022.08-2 openssh/VERSION=V_10_0_P2
+          #!   description: ppc64le-small
 
     env:
       MAKEFLAGS: SHELL=/usr/bin/bash
