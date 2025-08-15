@@ -20,7 +20,7 @@ jobs:
 
           #! https://toolchains.bootlin.com/downloads/releases/toolchains/aarch64/tarballs/
           - arch: x86-64
-            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME openssh/VERSION=V_10_0_P2
+            config: ARCH=x86-64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME openssh/VERSION=V_10_0_P2 openssl/VERSION=3.5.2
             description: x86-64-small
 
           #! - arch: armv7-eabihf
@@ -32,9 +32,9 @@ jobs:
           #!   description: armv7-eabihf
 
           #! 404: __toolchain__/VERSION=2022.08-2 
-          - arch: armv7-eabihf
-            config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME openssh/VERSION=V_10_0_P2
-            description: armv7-eabihf-small
+          #! - arch: armv7-eabihf
+          #!   config: ARCH=armv7-eabihf PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME openssh/VERSION=V_10_0_P2
+          #!   description: armv7-eabihf-small
 
           #! - arch: aarch64
           #!   config: ARCH=aarch64 PREFIX=/system/usr/local/static/openssh __all__/VERSION=latest
@@ -45,7 +45,7 @@ jobs:
           #!   description: aarch64
 
           - arch: aarch64
-            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME openssh/VERSION=V_10_0_P2
+            config: ARCH=aarch64 PREFIX=/usr/local/static/openssh SHRINK=SHRINK_LEVEL_RUNTIME openssh/VERSION=V_10_0_P2 openssl/VERSION=3.5.2
             description: aarch64-small
 
           #! https://toolchains.bootlin.com/downloads/releases/toolchains/powerpc64le-power8/
