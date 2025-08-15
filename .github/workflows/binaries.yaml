@@ -75,7 +75,7 @@ jobs:
           set +e
           make -j${{ steps.cpu-cores.outputs.count }} 2>&1 |grep -v "buildroot-linux-musl-gcc"
           set -e
-          find output/ -type f |sort
+          find output/ -type f |egrep -v "build_dir|staging_dir" |sort 
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
